@@ -1,4 +1,8 @@
-<!-- YOU CAN DELETE EVERYTHING IN THIS PAGE -->
+<script lang="ts">
+	import type { PageData } from './$types';
+
+	export let data: PageData;
+</script>
 
 <div class="container h-full mx-auto flex justify-center items-center">
 	<div class="space-y-5 my-10 text-center">
@@ -16,5 +20,8 @@
 			<li>FP3</li>
 			<li>Race</li>
 		</ul>
+		<div class="text-2xl">
+			{data.generatedAt}
+		</div>
 	</div>
 </div>
