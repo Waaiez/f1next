@@ -1,4 +1,5 @@
 import type { PageServerLoad } from './$types';
+import type { F1Data } from '$lib/types/f1.types';
 
 export const config = {
 	isr: {
@@ -8,18 +9,21 @@ export const config = {
 	}
 };
 
-export const load = (() => {
-	const generatedAt = new Date().toLocaleString('en-GB', {
-		day: '2-digit',
-		month: '2-digit',
-		year: 'numeric',
-		hour: '2-digit',
-		minute: '2-digit',
-		second: '2-digit',
-		fractionalSecondDigits: 3 // for milliseconds
-	});
+export const load = (async () => {
+	const generatedAt = new Date().toLocaleString();
+
+	const resData: F1Data = await fetch('http://ergast.com/api/f1/current/next.json').then((res) =>
+		res.json()
+	);
+
+	const f1data = resData.MRData;
+
+	const isSprint = 'Sprint' in f1data.RaceTable.Races[0];
 
 	return {
-		generatedAt
+		generatedAt,
+		f1data,
+		raceData: f1data.RaceTable.Races[0],
+		isSprint
 	};
 }) satisfies PageServerLoad;
