@@ -8,6 +8,10 @@
 
 	let raceData = data.raceData;
 	let isSprint = data.isSprint;
+
+	let lastUpdate = new Date(data.generatedAt);
+
+	console.log(data.generatedAt, lastUpdate);
 </script>
 
 <div class="container h-full mx-auto flex justify-center items-center">
@@ -20,7 +24,7 @@
 		<Sessions {raceData} {isSprint} />
 
 		<div>
-			Last Updated: {data.generatedAt}
+			Last Updated: {lastUpdate.toLocaleString()}
 			<br />
 			Data is updated every hour
 		</div>

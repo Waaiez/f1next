@@ -10,8 +10,9 @@ export const config = {
 };
 
 export const load = (async () => {
-	const generatedAt = new Date().toLocaleString();
+	const generatedAt = new Date();
 
+	console.log('Fetching data');
 	const resData: F1Data = await fetch('http://ergast.com/api/f1/current/next.json').then((res) =>
 		res.json()
 	);
